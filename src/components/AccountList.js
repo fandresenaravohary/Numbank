@@ -6,7 +6,7 @@ const AccountList = ({ accounts, handleModifyAccount }) => {
           {accounts.map(account => (
             <li key={account.id}>
               {account.nom} {account.prenom} - {account.numeroCompte}
-              <button onClick={() => handleModifyAccount(account.id)}>Editr</button>
+              <button onClick={() => handleModifyAccount(account.id)}>Edit</button>
             </li>
           ))}
         </ul>
@@ -14,4 +14,4 @@ const AccountList = ({ accounts, handleModifyAccount }) => {
     );
   };
   
-  export default AccountList;
+export default AccountList;
