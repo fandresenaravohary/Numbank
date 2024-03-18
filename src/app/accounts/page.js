@@ -3,7 +3,7 @@ import AccountList from "@/components/AccountList";
 const AccountsPage = () => {
     return (
       <div>
-        <h1>Liste des comptes</h1>
+        <h1>Lists of accounts</h1>
         <AccountList/>
       </div>
     );
