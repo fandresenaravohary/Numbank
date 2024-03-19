@@ -1,4 +1,4 @@
-import WithdrawalForm from '@/components/withdrawalForm'
+import WithdrawalForm from '@/components/WithdrawalForm'
 import React from 'react'
 
 export default function Withdrawal() {

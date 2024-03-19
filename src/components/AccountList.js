@@ -1,15 +1,14 @@
 const AccountList = ({ accounts, handleModifyAccount }) => {
     return (
       <div>
-        <h2>Lists of accounts</h2>
         <ul>
           {accounts.map(account => (
             <li key={account.id}>
-              {account.nom} {account.prenom} - {account.numeroCompte}
-              <button onClick={() => handleModifyAccount(account.id)}>Edit</button>
+              {account.firstName} {account.lastName} - {account.accountNumber}
             </li>
           ))}
         </ul>
+        <button onClick={() => handleModifyAccount(account.id)}>Edit</button>
       </div>
     );
   };
