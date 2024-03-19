@@ -1,12 +1,11 @@
-import AccountList from "@/components/AccountList";
+import AccountList from '@/components/AccountList'
+import React from 'react'
 
-const AccountsPage = () => {
-    return (
-      <div>
-        <h1>Lists of accounts</h1>
-        <AccountList/>
-      </div>
-    );
-  };
-  
-  export default AccountsPage;
+export default function Accounts() {
+  return (
+    <div>
+      <h1>Lists of accounts</h1>
+      <AccountList/>
+  </div>
+  )
+}
