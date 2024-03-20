@@ -26,8 +26,9 @@ export default function Withdrawal() {
     }
   ]
   return (
-    <div>
-        <WithdrawalForm accounts={accounts}/>
+    <div className='flex flex-col justify-center items-center h-screen'>
+      <h1 className='text-4xl font-bold mb-16'>Withdrawal's page</h1>
+      <WithdrawalForm accounts={accounts}/>
     </div>
   )
 }
