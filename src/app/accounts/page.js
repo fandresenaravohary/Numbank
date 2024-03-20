@@ -9,6 +9,18 @@ export default function Accounts() {
       firstName: "Alice",
       lastName: "Becker",
       accountNumber: 1234567
+    },
+    {
+      id: 2,
+      firstName: "Kobe",
+      lastName: "Bryant",
+      accountNumber: 1987643
+    },
+    {
+      id: 3,
+      firstName: "Michael",
+      lastName: "Jordan",
+      accountNumber: 1334567
     }
   ]
   return (
