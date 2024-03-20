@@ -25,13 +25,25 @@ const WithdrawalForm = ({ accounts, onSubmit }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Soumettre les données du formulaire au parent
-    onSubmit({
-      account: selectedAccount,
-      amount: amount,
-      date: date,
-      time: time
-    });
+  
+    const monthlySalary = selectedAccount.monthlySalary;
+    const creditAuthorized = monthlySalary / 3;
+  
+    const totalAmountAvailable = selectedAccount.balance + creditAuthorized;
+  
+    if (totalAmountAvailable >= amount) {
+      // Soumettre les données du formulaire au parent
+      onSubmit({
+        account: selectedAccount,
+        amount: amount,
+        date: date,
+        time: time
+      });
+
+      alert("withdrawal successful")
+    } else {
+      alert("Insufficient funds. Please choose a lower amount.");
+    }
   };
 
   return (
