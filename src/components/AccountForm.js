@@ -23,8 +23,8 @@ const AccountForm = () => {
 
 
     return (
-      <form className="py-4 mt-4 w-96 mx-auto" onSubmit={handleSubmit}>
-        <div className="border border-black p-4">
+      <form className="py-4 mt-4 mx-auto flex flex-row" onSubmit={handleSubmit}>
+        <div className="border border-black p-4 max-w-xl w-96">
           <div className="mb-4 flex flex-col">
             <label htmlFor="firstName" className="text-black">
               FirstName
@@ -49,7 +49,7 @@ const AccountForm = () => {
               name="lastName"
               value={formData.lastName}
               onChange={handleChange}
-              className="mt-1 w-full h-12 rounded-md border border-black"
+              className="mt-1 w-full h-12 border border-black"
               required
             />
           </div>
@@ -63,7 +63,7 @@ const AccountForm = () => {
               name="birthDate"
               value={formData.birthDate}
               onChange={handleChange}
-              className="mt-1 w-full h-12 rounded-md border border-black"
+              className="mt-1 w-full h-12 border border-black"
               required
             />
           </div>
@@ -77,7 +77,7 @@ const AccountForm = () => {
               name="salary"
               value={formData.salary}
               onChange={handleChange}
-              className="mt-1 w-full h-12 rounded-md border border-black"
+              className="mt-1 w-full h-12 border border-black"
               required
             />
           </div>
@@ -91,18 +91,23 @@ const AccountForm = () => {
               name="accountNumber"
               value={formData.accountNumber}
               onChange={handleChange}
-              className="mt-1 w-full h-12 rounded-md border border-black"
+              className="mt-1 w-full h-12 border border-black"
               required
             />
           </div>
           <div className="flex justify-center">
             <button
               type="submit"
-              className="bg-blue-700 p-3 text-white font-bold hover:bg-blue-600 w-48 mx-auto"
+              className="bg-gray-400 p-3 text-white font-bold hover:bg-gray-600 w-48 mx-auto"
             >
-              Create an account
+              Add 
             </button>
           </div>
+        </div>
+        <div className=" bg-gray-400 flex flex-col justify-center items-center text-white py-12 px-6 md:py-24 md:px-12 max-w-xl w-96">
+          <h2 className="text-4xl font-bold mb-2">Hello, Friend</h2>
+          <div className="border-2 w-10 border-white inline-block mb-2"></div>
+          <p className="mb-10">Welcome to NumBank</p>
         </div>
       </form>
     );
