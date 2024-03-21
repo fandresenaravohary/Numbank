@@ -48,8 +48,8 @@ const WithdrawalForm = ({ accounts, onSubmit }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div className="border border-black p-4 max-w-xl w-96 flex flex-col justify-center items-center">
+    <form onSubmit={handleSubmit} className="bg-white">
+      <div className="p-4 max-w-xl w-96 flex flex-col justify-center items-center shadow-lg">
         <div className="mb-4 flex flex-col">
           <label htmlFor="account">Account: </label>
           <select
