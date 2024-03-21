@@ -1,5 +1,5 @@
-"use client"
-import React, { useState } from 'react';
+"use client";
+import React, { useState } from "react";
 
 const InterestConfiguration = () => {
   const [interest7Days, setInterest7Days] = useState(1);
@@ -37,27 +37,34 @@ const InterestConfiguration = () => {
   };
 
   return (
-    <div>
-      <div className='flex flex-col'>
-        <label htmlFor="interest7Days">Interest rate for the first 7 days (%)</label>
-        <input
-          id="interest7Days"
-          type="number"
-          value={interest7Days}
-          onChange={handleInterest7DaysChange}
-        />
+    <form className="bg-white">
+      <div className=" p-4 max-w-xl w-auto h-48 flex flex-col justify-center items-center shadow-lg">
+        <div className="mb-4">
+          <label htmlFor="interest7Days">
+            Interest rate for the first 7 days (%)
+          </label>
+          <input
+            id="interest7Days"
+            type="number"
+            value={interest7Days}
+            onChange={handleInterest7DaysChange}
+            className="w-12 ml-2 border border-black"
+          />
+        </div>
+        <div className="mt-4">
+          <label htmlFor="interestAfter7Days">
+            Interest rate after 7 days (%)
+          </label>
+          <input
+            id="interestAfter7Days"
+            type="number"
+            value={interestAfter7Days}
+            onChange={handleInterestAfter7DaysChange}
+            className="w-12 ml-2 border border-black"
+          />
+        </div>
       </div>
-      <div>
-        <label htmlFor="interestAfter7Days">Interest rate after 7 days (%)</label>
-        <input
-          id="interestAfter7Days"
-          type="number"
-          value={interestAfter7Days}
-          onChange={handleInterestAfter7DaysChange}
-        />
-      </div>
-      
-    </div>
+    </form>
   );
 };
 
