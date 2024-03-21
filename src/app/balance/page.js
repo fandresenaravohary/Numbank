@@ -1,19 +1,7 @@
 import BalanceDisplay from "@/components/ViewBalance";
+import { balances } from "@/app/data";
 
-const BalancePage = () => {
-    const balances = {
-      "2024-03-01": {
-        principal: 1500,
-        loans: 250,
-        interest: 10
-      },
-      "2024-03-02": {
-        principal: 1550,
-        loans: 299,
-        interest: 5
-      }
-    };
-  
+const BalancePage = () => { 
     return (
       <div>
         <BalanceDisplay balances={balances} />
