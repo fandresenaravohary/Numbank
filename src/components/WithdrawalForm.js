@@ -1,61 +1,50 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
+import { useForm } from "react-hook-form";
 
 const WithdrawalForm = ({ accounts, onSubmit }) => {
-  const [selectedAccount, setSelectedAccount] = useState("");
-  const [amount, setAmount] = useState("");
-  const [date, setDate] = useState("");
-  const [time, setTime] = useState("");
-  const [overdraftEnabled, setOverdraftEnabled] = useState(false);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({ defaultValues: { amount: "", date: "", time: "", overdraftEnabled: false } });
 
-  const handleAccountChange = (e) => {
-    setSelectedAccount(e.target.value);
-  };
+  const handleSubmitForm = (data) => {
+    const selectedAccount = accounts.find(
+      (account) => account.id === data.account
+    );
 
-  const handleAmountChange = (e) => {
-    setAmount(e.target.value);
-  };
-
-  const handleDateChange = (e) => {
-    setDate(e.target.value);
-  };
-
-  const handleTimeChange = (e) => {
-    setTime(e.target.value);
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
+    if (!selectedAccount) {
+      // Handle error: Account not found
+      console.error("Selected account not found in provided accounts list.");
+      return;
+    }
 
     const monthlySalary = selectedAccount.salary;
     const creditAuthorized = monthlySalary / 3;
 
     const totalAmountAvailable = selectedAccount.balance + creditAuthorized;
 
-    if (totalAmountAvailable >= amount) {
-      // Soumettre les données du formulaire au parent
+    if (totalAmountAvailable >= data.amount) {
+      // Submit form data
       onSubmit({
-        account: selectedAccount,
-        amount: amount,
-        date: date,
-        time: time,
+        ...data,
       });
 
-      alert("withdrawal successful");
+      alert("Retrait effectué avec succès");
     } else {
-      alert("Insufficient funds. Please choose a lower amount.");
+      alert("Fonds insuffisants. Veuillez choisir un montant inférieur.");
     }
   };
 
   return (
-    <form onSubmit={handleSubmit} className="bg-white">
+    <form onSubmit={handleSubmit(handleSubmitForm)} className="bg-white">
       <div className="p-4 max-w-xl w-96 flex flex-col justify-center items-center shadow-lg">
         <div className="mb-4 flex flex-col">
-          <label htmlFor="account">Account: </label>
+          <label htmlFor="account">Account:</label>
           <select
             id="account"
-            value={selectedAccount}
-            onChange={handleAccountChange}
+            {...register("account", { required: true })}
             className="mt-1 w-80 h-10 border border-black pl-2"
           >
             {accounts.map((account) => (
@@ -64,44 +53,48 @@ const WithdrawalForm = ({ accounts, onSubmit }) => {
               </option>
             ))}
           </select>
+          {errors.account && <p className="text-red-500">{errors.account.message}</p>}
         </div>
         <div className="mb-4 flex flex-col">
           <label htmlFor="amount">Amount</label>
           <input
             id="amount"
             type="number"
-            value={amount}
-            onChange={handleAmountChange}
+            name="amount"
+            {...register("amount", { required: true })}
             className="mt-1 w-80 h-10 border border-black pl-2"
           />
+          {errors.amount && <p className="text-red-500">{errors.amount.message}</p>}
         </div>
         <div className="mb-4 flex flex-col">
           <label htmlFor="date">Date</label>
           <input
             id="date"
             type="date"
-            value={date}
-            onChange={handleDateChange}
+            name="date"
+            {...register("date", { required: true })}
             className="mt-1 w-80 h-10 border border-black pl-2"
           />
+          {errors.date && <p className="text-red-500">{errors.date.message}</p>}
         </div>
         <div className="mb-4 flex flex-col">
           <label htmlFor="time">Time</label>
           <input
             id="time"
             type="time"
-            value={time}
-            onChange={handleTimeChange}
+            name="time"
+            {...register("time", { required: true })}
             className="mt-1 w-80 h-10 border border-black pl-2"
           />
+          {errors.time && <p className="text-red-500">{errors.time.message}</p>}
         </div>
         <div>
-          <label htmlFor="overdraftEnabled">Enable overdraft</label>
+          <label htmlFor="overdraftEnabled">Activate overdraft</label>
           <input
             id="overdraftEnabled"
             type="checkbox"
-            checked={overdraftEnabled}
-            onChange={(e) => setOverdraftEnabled(e.target.checked)}
+            name="overdraftEnabled"
+            {...register("overdraftEnabled")}
             className="ml-1"
           />
         </div>
