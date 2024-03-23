@@ -1,4 +1,4 @@
-import ExternalTransferForm from '@/components/Transfer'
+import ExternalTransferForm from '@/components/ExternalTransfer'
 import React from 'react'
 
 export default function TransferPage() {
