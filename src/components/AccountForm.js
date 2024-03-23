@@ -1,21 +1,37 @@
-'use client';
+"use client"
+import React from 'react';
 import { useForm } from 'react-hook-form';
 
 const AccountForm = () => {
-  const { register, handleSubmit, formState: { errors } } = useForm();
+  const { register, handleSubmit, formState: { errors }, reset } = useForm();
 
   const onSubmit = async (data) => {
-    // Envoi des données à l'API
-    console.log(data);
+    try {
+      const response = await fetch('url_de_votre_api', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      });
+
+      if (!response.ok) {
+        throw new Error('Error during the creation');
+      }
+      reset();
+      alert('Successful!');
+    } catch (error) {
+      console.error(error);
+      alert('An error occurred when creating your account');
+    }
   };
 
   return (
-    <form className="py-4 mt-4 mx-auto flex flex-row" onSubmit={handleSubmit(onSubmit)}>
+    <form className="py-4 mt-4 mx-auto flex flex-col items-center" onSubmit={handleSubmit(onSubmit)}>
       <div className="border border-black p-4 max-w-xl w-96">
-
         <div className="mb-4 flex flex-col">
           <label htmlFor="firstName" className="text-black">
-            FirstName
+            Prénom
           </label>
           <input
             type="text"
@@ -24,12 +40,12 @@ const AccountForm = () => {
             {...register('firstName', { required: true })}
             className="mt-1 w-full h-12 border border-black"
           />
-          {errors.firstName && <span className="text-red-500">Please, enter your firstName</span>}
+          {errors.firstName && <span className="text-red-500">Please, enter your first name</span>}
         </div>
 
         <div className="mb-4 flex flex-col">
           <label htmlFor="lastName" className="text-black">
-            Name
+            Nom
           </label>
           <input
             type="text"
@@ -38,12 +54,12 @@ const AccountForm = () => {
             {...register('lastName', { required: true })}
             className="mt-1 w-full h-12 border border-black"
           />
-          {errors.lastName && <span className="text-red-500">Please, enter your name</span>}
+          {errors.lastName && <span className="text-red-500">Please, enter your last name</span>}
         </div>
 
         <div className="mb-4 flex flex-col">
           <label htmlFor="birthDate" className="text-black">
-            Birth Date
+            Date de naissance
           </label>
           <input
             type="date"
@@ -57,7 +73,7 @@ const AccountForm = () => {
 
         <div className="mb-4 flex flex-col">
           <label htmlFor="salary" className="text-black">
-            Salaire mensuel net
+            Monthly salary
           </label>
           <input
             type="number"
@@ -71,7 +87,7 @@ const AccountForm = () => {
 
         <div className="mb-4 flex flex-col">
           <label htmlFor="accountNumber" className="text-black">
-            Numéro de compte unique
+            Account number
           </label>
           <input
             type="text"
@@ -84,18 +100,18 @@ const AccountForm = () => {
         </div>
 
         <div className="flex justify-center">
-          <button type="submit" className="bg-gray-400 p-3 text-white font-bold hover:bg-gray-600 w-48 mx-auto">
+          <button type="submit" className="bg-gray-400 p-3 text-white font-bold hover:bg-gray-600 w-48">
             Add an account
           </button>
         </div>
       </div>
-        <div className=" bg-gray-400 flex flex-col justify-center items-center text-white py-12 px-6 md:py-24 md:px-12 max-w-xl w-96">
-          <h2 className="text-4xl font-bold mb-2">Hello, Friend</h2>
-          <div className="border-2 w-10 border-white inline-block mb-2"></div>
-          <p className="mb-10">Welcome to NumBank</p>
-        </div>
-      </form>
-    );
-  };
+      <div className="bg-gray-400 mt-4 p-8 max-w-xl w-96 flex flex-col items-center text-white">
+        <h2 className="text-4xl font-bold mb-2">Hello, Friends</h2>
+        <div className="border-2 w-10 border-white inline-block mb-2"></div>
+        <p>Welcome to NumBank</p>
+      </div>
+    </form>
+  );
+};
 
 export default AccountForm;
