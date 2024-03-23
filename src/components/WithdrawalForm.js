@@ -1,4 +1,4 @@
-"use client";
+"use client"
 import React from "react";
 import { useForm } from "react-hook-form";
 
@@ -7,16 +7,15 @@ const WithdrawalForm = ({ accounts, onSubmit }) => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({ defaultValues: { amount: "", date: "", time: "", overdraftEnabled: false } });
+  } = useForm({ defaultValues: { account: "", amount: "", date: "", time: "", overdraftEnabled: false } });
 
   const handleSubmitForm = (data) => {
     const selectedAccount = accounts.find(
-      (account) => account.id === data.account
+      (account) => account.id === parseInt(data.account)
     );
 
     if (!selectedAccount) {
-      // Handle error: Account not found
-      console.error("Selected account not found in provided accounts list.");
+      alert("Selected account not found in provided accounts list.");
       return;
     }
 
@@ -25,12 +24,8 @@ const WithdrawalForm = ({ accounts, onSubmit }) => {
 
     const totalAmountAvailable = selectedAccount.balance + creditAuthorized;
 
-    if (totalAmountAvailable >= data.amount) {
-      // Submit form data
-      onSubmit({
-        ...data,
-      });
-
+    if (totalAmountAvailable >= parseFloat(data.amount)) {
+      onSubmit(data);
       alert("Retrait effectué avec succès");
     } else {
       alert("Fonds insuffisants. Veuillez choisir un montant inférieur.");
@@ -47,13 +42,14 @@ const WithdrawalForm = ({ accounts, onSubmit }) => {
             {...register("account", { required: true })}
             className="mt-1 w-80 h-10 border border-black pl-2"
           >
+            <option value="">Select an account</option>
             {accounts.map((account) => (
               <option key={account.id} value={account.id}>
                 {account.firstName} {account.lastName} - {account.accountNumber}
               </option>
             ))}
           </select>
-          {errors.account && <p className="text-red-500">{errors.account.message}</p>}
+          {errors.account && <p className="text-red-500">Account is required.</p>}
         </div>
         <div className="mb-4 flex flex-col">
           <label htmlFor="amount">Amount</label>
@@ -64,7 +60,7 @@ const WithdrawalForm = ({ accounts, onSubmit }) => {
             {...register("amount", { required: true })}
             className="mt-1 w-80 h-10 border border-black pl-2"
           />
-          {errors.amount && <p className="text-red-500">{errors.amount.message}</p>}
+          {errors.amount && <p className="text-red-500">Amount is required.</p>}
         </div>
         <div className="mb-4 flex flex-col">
           <label htmlFor="date">Date</label>
@@ -75,7 +71,7 @@ const WithdrawalForm = ({ accounts, onSubmit }) => {
             {...register("date", { required: true })}
             className="mt-1 w-80 h-10 border border-black pl-2"
           />
-          {errors.date && <p className="text-red-500">{errors.date.message}</p>}
+          {errors.date && <p className="text-red-500">Date is required.</p>}
         </div>
         <div className="mb-4 flex flex-col">
           <label htmlFor="time">Time</label>
@@ -86,7 +82,7 @@ const WithdrawalForm = ({ accounts, onSubmit }) => {
             {...register("time", { required: true })}
             className="mt-1 w-80 h-10 border border-black pl-2"
           />
-          {errors.time && <p className="text-red-500">{errors.time.message}</p>}
+          {errors.time && <p className="text-red-500">Time is required.</p>}
         </div>
         <div>
           <label htmlFor="overdraftEnabled">Activate overdraft</label>
