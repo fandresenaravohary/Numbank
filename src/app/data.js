@@ -35,4 +35,29 @@ export const accountList = [
     }
   ]
 
-  
+  export const transferList = [
+    {
+      id: 1,
+      amount: 500,
+      reason: "Paiement du loyer",
+      effectDate: "2024-04-01",
+      registerDate: "2024-03-25",
+      status: "done"
+    },
+    {
+      id: 2,
+      amount: 300,
+      reason: "Achat d'épicerie",
+      effectDate: "2024-03-28",
+      registerDate: "2024-03-25",
+      status: "pending"
+    },
+    {
+      id: 3,
+      amount: 1000,
+      reason: "Virement à un ami",
+      effectDate: "2024-03-30",
+      registerDate: "2024-03-28",
+      status: "pending"
+    }
+  ];
