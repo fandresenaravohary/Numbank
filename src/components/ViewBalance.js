@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 
 const BalanceDisplay = ({ balances }) => {
-  const currentDate = new Date().toISOString().split("T")[0]; // Obtenez la date actuelle au format YYYY-MM-DD
+  const currentDate = new Date().toISOString().split("T")[0];
   const [selectedDate, setSelectedDate] = useState(currentDate);
 
   const handleChangeDate = (e) => {
@@ -24,7 +24,7 @@ const BalanceDisplay = ({ balances }) => {
               {date}
             </option>
           ))}
-          <option value={currentDate}>{currentDate}</option> {/* Ajoutez la date actuelle à la liste des options */}
+          <option value={currentDate}>{currentDate}</option>
         </select>
       </div>
       <div>
