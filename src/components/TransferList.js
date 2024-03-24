@@ -13,8 +13,8 @@ const TransferList = ({ transfers }) => {
       <h2>Liste des virements</h2>
       {transfers.map((transfer) => (
         <div key={transfer.id} className="border p-4 my-2">
-          <p>Montant : {transfer.amount}</p>
-          <p>Motif : {transfer.reason}</p>
+          <p>Amount : {transfer.amount}</p>
+          <p>Reason : {transfer.reason}</p>
           <p>Effective Date : {transfer.effectDate}</p>
           <p>Registration date : {transfer.registerDate}</p>
           {transfer.status === "done" ? (
