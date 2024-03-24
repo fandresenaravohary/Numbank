@@ -1,3 +1,4 @@
+"use client"
 import React, { useState } from "react";
 
 const TransferList = ({ transfers }) => {
@@ -10,7 +11,7 @@ const TransferList = ({ transfers }) => {
 
   return (
     <div>
-      <h2>Liste des virements</h2>
+      <h2>Lists of transfers</h2>
       {transfers.map((transfer) => (
         <div key={transfer.id} className="border p-4 my-2">
           <p>Amount : {transfer.amount}</p>
@@ -26,7 +27,7 @@ const TransferList = ({ transfers }) => {
                 <button onClick={() => handleCancel(transfer.id)}>Cancel</button>
               )}
               {cancelledTransferId === transfer.id && (
-                <p>Transfer Successful</p>
+                <p>Transfer cancelled</p>
               )}
             </>
           )}
