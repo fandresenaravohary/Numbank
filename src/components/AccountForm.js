@@ -27,7 +27,7 @@ const AccountForm = () => {
   };
 
   return (
-    <form className="py-4 mt-4 mx-auto flex flex-col items-center" onSubmit={handleSubmit(onSubmit)}>
+    <form className="py-4 mt-4 mx-auto flex flex-row items-center" onSubmit={handleSubmit(onSubmit)}>
       <div className="border border-black p-4 max-w-xl w-96">
         <div className="mb-4 flex flex-col">
           <label htmlFor="firstName" className="text-black">
@@ -104,11 +104,6 @@ const AccountForm = () => {
             Add an account
           </button>
         </div>
-      </div>
-      <div className="bg-gray-400 mt-4 p-8 max-w-xl w-96 flex flex-col items-center text-white">
-        <h2 className="text-4xl font-bold mb-2">Hello, Friends</h2>
-        <div className="border-2 w-10 border-white inline-block mb-2"></div>
-        <p>Welcome to NumBank</p>
       </div>
     </form>
   );
