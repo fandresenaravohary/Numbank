@@ -1,4 +1,5 @@
 "use client"
+import { useRouter } from 'next/navigation';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 
@@ -27,46 +28,48 @@ const AccountForm = () => {
   };
 
   return (
-    <form className="py-4 mt-4 mx-auto flex flex-row items-center" onSubmit={handleSubmit(onSubmit)}>
-      <div className="border border-black p-4 max-w-xl w-96">
+    <form className="py-4 mt-4 mx-auto flex flex-row items-center bg-white shadow-lg" onSubmit={handleSubmit(onSubmit)}>
+      <div className=" p-4 max-w-xl w-96">
         <div className="mb-4 flex flex-col">
           <label htmlFor="firstName" className="text-black">
-            Prénom
+            First Name
           </label>
           <input
             type="text"
             id="firstName"
             name="firstName"
             {...register('firstName', { required: true })}
-            className="mt-1 w-full h-12 border border-black"
+            className="mt-1 w-full h-12 border border-black p-2"
+            placeholder='enter your first name'
           />
           {errors.firstName && <span className="text-red-500">Please, enter your first name</span>}
         </div>
 
         <div className="mb-4 flex flex-col">
           <label htmlFor="lastName" className="text-black">
-            Nom
+            Last Name
           </label>
           <input
             type="text"
             id="lastName"
             name="lastName"
             {...register('lastName', { required: true })}
-            className="mt-1 w-full h-12 border border-black"
+            className="mt-1 w-full h-12 border border-black p-2"
+            placeholder='enter your last name'
           />
           {errors.lastName && <span className="text-red-500">Please, enter your last name</span>}
         </div>
 
         <div className="mb-4 flex flex-col">
           <label htmlFor="birthDate" className="text-black">
-            Date de naissance
+            Birth date
           </label>
           <input
             type="date"
             id="birthDate"
             name="birthDate"
             {...register('birthDate', { required: true })}
-            className="mt-1 w-full h-12 border border-black"
+            className="mt-1 w-full h-12 border border-black p-2"
           />
           {errors.birthDate && <span className="text-red-500">Please, enter your birth date</span>}
         </div>
@@ -80,7 +83,8 @@ const AccountForm = () => {
             id="salary"
             name="salary"
             {...register('salary', { required: true })}
-            className="mt-1 w-full h-12 border border-black"
+            className="mt-1 w-full h-12 border border-black p-2"
+            placeholder='enter your salary'
           />
           {errors.salary && <span className="text-red-500">Please, enter your salary</span>}
         </div>
@@ -94,7 +98,8 @@ const AccountForm = () => {
             id="accountNumber"
             name="accountNumber"
             {...register('accountNumber', { required: true })}
-            className="mt-1 w-full h-12 border border-black"
+            className="mt-1 w-full h-12 border border-black p-2"
+            placeholder='enter your account number'
           />
           {errors.accountNumber && <span className="text-red-500">Please, enter your account number</span>}
         </div>
