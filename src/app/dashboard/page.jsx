@@ -1,36 +1,27 @@
-"use client"
-import AccountList from '@/components/AccountList'
-import TopNav from '@/components/TopNav'
 import React from 'react'
+import Card from '../ui/dashboard/card/card';
+import styles from '@/app/ui/dashboard/dashboard.module.css'
+import Transactions from '../ui/dashboard/transactions/transactions';
+import Chart from '../ui/dashboard/chart/chart';
+import Rightbar from '../ui/dashboard/rigthbar/rightbar';
 
-export default function HomePage() {
-  const accounts = [
-    {
-      id: 1,
-      firstName: "Alice",
-      lastName: "Becker",
-      salary: 30000,
-      accountNumber: 1234567
-    },
-    {
-      id: 2,
-      firstName: "Kobe",
-      lastName: "Bryant",
-      salary: 400000,
-      accountNumber: 1987643
-    },
-    {
-      id: 3,
-      firstName: "Michael",
-      lastName: "Jordan",
-      salary: 1000000,
-      accountNumber: 1334567
-    }
-  ]
+const Dashboard = () => {
   return (
-    <div>
-        <TopNav/>
-        <AccountList accounts={accounts}/>
+    <div className={styles.wrapper}>
+      <div className={styles.main}>
+        <div className={styles.cards}>
+          <Card/>
+          <Card/>
+          <Card/>
+        </div>
+        <Transactions/>
+        <Chart/>
+      </div>
+      <div className={styles.side}>
+        <Rightbar/>
+      </div>
     </div>
   )
 }
+
+export default Dashboard;
