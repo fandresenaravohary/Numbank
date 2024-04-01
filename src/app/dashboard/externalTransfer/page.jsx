@@ -1,6 +1,6 @@
 "use client"
 import React, { useState } from "react";
-import styles from '@/app/ui/dashboard/products/addProduct/addProduct.module.css'
+import styles from '@/app/ui/dashboard/externalTransfer/externalTransfer.module.css'
 
 const ExternalTransferForm = ({ onSubmit }) => {
   const [formData, setFormData] = useState({
@@ -9,6 +9,8 @@ const ExternalTransferForm = ({ onSubmit }) => {
     effectiveDate: "",
     registrationDate: "",
   });
+
+  const [formSubmitted, setFormSubmitted] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -20,7 +22,10 @@ const ExternalTransferForm = ({ onSubmit }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit(formData);
+    setFormSubmitted(true);
+    if(formData.amount && formData.reason && formData.effectiveDate && formData.registrationDate){
+      onSubmit(formData);
+    }
   };
 
   return (
@@ -36,7 +41,7 @@ const ExternalTransferForm = ({ onSubmit }) => {
               value={formData.amount}
               onChange={handleChange}
             />
-            {!formData.amount && <p className="text-red-500">Please enter the amount.</p>}
+            {formSubmitted && !formData.amount && <p className="text-red-500">Please enter the amount.</p>}
           </div>
           <div className={styles.section}>
             <label htmlFor="reason">Reason</label>
@@ -47,7 +52,7 @@ const ExternalTransferForm = ({ onSubmit }) => {
               value={formData.reason}
               onChange={handleChange}
             />
-            {!formData.reason && <p className="text-red-500">Please enter the reason for the transfer.</p>}
+            {formSubmitted && !formData.reason && <p className="text-red-500">Please enter the reason for the transfer.</p>}
           </div>
           <div className={styles.section}>
             <label htmlFor="effectiveDate">Effective Date</label>
@@ -58,7 +63,7 @@ const ExternalTransferForm = ({ onSubmit }) => {
               value={formData.effectiveDate}
               onChange={handleChange}
             />
-            {!formData.effectiveDate && <p className="text-red-500">Please enter the effective date.</p>}
+            {formSubmitted && !formData.effectiveDate && <p className="text-red-500">Please enter the effective date.</p>}
           </div>
           <div className={styles.section}>
             <label htmlFor="registrationDate">Registration Date</label>
@@ -69,7 +74,7 @@ const ExternalTransferForm = ({ onSubmit }) => {
               value={formData.registrationDate}
               onChange={handleChange}
             />
-            {!formData.registrationDate && <p className="text-red-500">Please enter the registration date.</p>}
+            {formSubmitted && !formData.registrationDate && <p className="text-red-500">Please enter the registration date.</p>}
           </div>
           <button
             type="submit"
@@ -84,3 +89,4 @@ const ExternalTransferForm = ({ onSubmit }) => {
 };
 
 export default ExternalTransferForm;
+
