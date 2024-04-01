@@ -41,6 +41,11 @@ const menuItems = [
         icon: <FaMoneyBillTransfer />,
       },
       {
+        title: "External Transfers",
+        path: "/dashboard/externalTransfer",
+        icon: <FaMoneyBillTransfer />,
+      },
+      {
         title: "Standing Balance",
         path: "/dashboard/balance",
         icon: <MdAccountBalanceWallet />,
