@@ -11,6 +11,7 @@ const ExternalTransferForm = ({ onSubmit }) => {
   });
 
   const [formSubmitted, setFormSubmitted] = useState(false);
+  const [externalTransfers, setExternalTransfers] = useState([]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -25,6 +26,13 @@ const ExternalTransferForm = ({ onSubmit }) => {
     setFormSubmitted(true);
     if(formData.amount && formData.reason && formData.effectiveDate && formData.registrationDate){
       onSubmit(formData);
+      setExternalTransfers([...externalTransfers, formData]); // Ajouter le transfert externe à la liste
+      setFormData({ // Réinitialiser le formulaire après la soumission
+        amount: "",
+        reason: "",
+        effectiveDate: "",
+        registrationDate: "",
+      });
     }
   };
 
@@ -83,6 +91,20 @@ const ExternalTransferForm = ({ onSubmit }) => {
             Submit Transfer
           </button>
         </form>
+      </div>
+
+      <div className={styles.container}>
+        <h2>External Transfer List</h2>
+        <ul>
+          {externalTransfers.map((transfer, index) => (
+            <li key={index}>
+              <p>Amount: {transfer.amount}</p>
+              <p>Reason: {transfer.reason}</p>
+              <p>Effective Date: {transfer.effectiveDate}</p>
+              <p>Registration Date: {transfer.registrationDate}</p>
+            </li>
+          ))}
+        </ul>
       </div>
     </div>
   );
