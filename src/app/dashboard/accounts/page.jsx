@@ -20,6 +20,18 @@ const AccountForm = () => {
     }));
   };
 
+  const sendFormDataToBackend = async (formData) => {
+    try {
+      const response = await axios.post('https://app.numbank.mg/accounts', formData);
+      console.log(response.data);
+      setAccounts((prevAccounts) => [...prevAccounts, response.data]);
+    } catch (error) {
+      console.error('An error occurred while sending the data to the backend:', error);
+      alert('An error occurred while sending the data to the backend');
+    }
+  };
+  
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const today = new Date();
@@ -32,9 +44,11 @@ const AccountForm = () => {
       age--;
     }
     if (age < 21) {
-      alert("Le client doit avoir plus de 21 ans.");
+      alert("Please, you must have 21 years");
       return;
     }
+
+    sendFormDataToBackend(formData);
     setAccounts((prevState) => [...prevState, formData]);
     setFormData({
       firstName: "",
