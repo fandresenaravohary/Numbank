@@ -3,16 +3,11 @@ import styles from "@/app/ui/dashboard/sidebar/sidebar.module.css";
 import {
   MdAccountBalance,
   MdAccountBalanceWallet,
-  MdAnalytics,
-  MdAttachMoney,
   MdDashboard,
-  MdHelpCenter,
-  MdOutlineSettings,
-  MdPeople,
-  MdShoppingBag,
   MdSupervisedUserCircle,
-  MdWork,
 } from "react-icons/md";
+import { BiMoneyWithdraw } from "react-icons/bi";
+import { GiPayMoney } from "react-icons/gi";
 import MenuLink from "./menuLink/menuLink";
 import { FaMoneyBillTransfer } from "react-icons/fa6";
 
@@ -33,7 +28,12 @@ const menuItems = [
       {
         title: "Withdrawal",
         path: "/dashboard/withdrawal",
-        icon: <MdAttachMoney />,
+        icon: <BiMoneyWithdraw />,
+      },
+      {
+        title: "interest",
+        path: "/dashboard/interest",
+        icon: <GiPayMoney />,
       },
       {
         title: "Transfers",
