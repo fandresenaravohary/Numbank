@@ -1,60 +1,77 @@
 "use client"
-import React from "react";
-import { useForm } from "react-hook-form";
+import React, { useState } from "react";
 
 const ExternalTransferForm = ({ onSubmit }) => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
+  const [formData, setFormData] = useState({
+    amount: "",
+    reason: "",
+    effectiveDate: "",
+    registrationDate: "",
+  });
 
-  const onSubmitForm = (data) => {
-    onSubmit(data);
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onSubmit(formData);
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmitForm)} className="bg-white">
+    <form onSubmit={handleSubmit} className="bg-white">
       <div className="p-4 max-w-xl w-96 flex flex-col justify-center items-center shadow-lg">
         <div className="mb-4 flex flex-col">
           <label htmlFor="amount">Amount</label>
           <input
             id="amount"
             type="number"
-            {...register("amount", { required: true })}
+            name="amount"
+            value={formData.amount}
+            onChange={handleChange}
             className="mt-1 w-80 h-10 border border-black pl-2"
           />
-          {errors.amount && <p className="text-red-500">Please enter the amount.</p>}
+          {!formData.amount && <p className="text-red-500">Please enter the amount.</p>}
         </div>
         <div className="mb-4 flex flex-col">
           <label htmlFor="reason">Reason</label>
           <input
             id="reason"
             type="text"
-            {...register("reason", { required: true })}
+            name="reason"
+            value={formData.reason}
+            onChange={handleChange}
             className="mt-1 w-80 h-10 border border-black pl-2"
           />
-          {errors.reason && <p className="text-red-500">Please enter the reason for the transfer.</p>}
+          {!formData.reason && <p className="text-red-500">Please enter the reason for the transfer.</p>}
         </div>
         <div className="mb-4 flex flex-col">
           <label htmlFor="effectiveDate">Effective Date</label>
           <input
             id="effectiveDate"
             type="date"
-            {...register("effectiveDate", { required: true })}
+            name="effectiveDate"
+            value={formData.effectiveDate}
+            onChange={handleChange}
             className="mt-1 w-80 h-10 border border-black pl-2"
           />
-          {errors.effectiveDate && <p className="text-red-500">Please enter the effective date.</p>}
+          {!formData.effectiveDate && <p className="text-red-500">Please enter the effective date.</p>}
         </div>
         <div className="mb-4 flex flex-col">
           <label htmlFor="registrationDate">Registration Date</label>
           <input
             id="registrationDate"
             type="date"
-            {...register("registrationDate", { required: true })}
+            name="registrationDate"
+            value={formData.registrationDate}
+            onChange={handleChange}
             className="mt-1 w-80 h-10 border border-black pl-2"
           />
-          {errors.registrationDate && <p className="text-red-500">Please enter the registration date.</p>}
+          {!formData.registrationDate && <p className="text-red-500">Please enter the registration date.</p>}
         </div>
         <button
           type="submit"
