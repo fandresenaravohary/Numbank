@@ -47,7 +47,7 @@ const menuItems = [
       },
       {
         title: "Standing Balance",
-        path: "/dashboard/balance",
+        path: "/dashboard/standingBalance",
         icon: <MdAccountBalanceWallet />,
       },
       {
