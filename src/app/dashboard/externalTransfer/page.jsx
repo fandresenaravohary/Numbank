@@ -26,8 +26,8 @@ const ExternalTransferForm = ({ onSubmit }) => {
     setFormSubmitted(true);
     if(formData.amount && formData.reason && formData.effectiveDate && formData.registrationDate){
       onSubmit(formData);
-      setExternalTransfers([...externalTransfers, formData]); // Ajouter le transfert externe à la liste
-      setFormData({ // Réinitialiser le formulaire après la soumission
+      setExternalTransfers([...externalTransfers, formData]);
+      setFormData({
         amount: "",
         reason: "",
         effectiveDate: "",

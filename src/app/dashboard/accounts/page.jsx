@@ -111,7 +111,7 @@ const AccountForm = () => {
         </form>
       </div>
       <div className={styles.container}>
-        <h2 className={styles.title}>Liste des comptes:</h2>
+        <h2 className={styles.title}>Accounts lists:</h2>
         <table className={styles.table}>
           <tbody>
             {accounts.map((account, index) => (

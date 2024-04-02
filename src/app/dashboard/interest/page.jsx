@@ -34,7 +34,6 @@ const InterestConfiguration = () => {
       return;
     }
 
-    // Implémenter la logique pour enregistrer les valeurs des taux d'intérêt dans la base de données
     alert("Changes saved successfully!");
   };
 

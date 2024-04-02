@@ -47,7 +47,7 @@ const WithdrawalForm = ({ accounts }) => {
         overdraftEnabled: formData.overdraftEnabled,
       };
       setWithdrawals((prevWithdrawals) => [...prevWithdrawals, newWithdrawal]);
-      alert("Retrait effectué avec succès");
+      alert("Withdrawal completed successfully");
       setFormData({
         accountId: "",
         amount: "",
@@ -57,7 +57,7 @@ const WithdrawalForm = ({ accounts }) => {
       });
     } else {
       alert(
-        "Fonds insuffisants. Veuillez choisir un montant inférieur ou activer le découvert autorisé."
+        "Insufficient funds. Please choose a lower amount or activate the authorised overdraft."
       );
     }
   };
