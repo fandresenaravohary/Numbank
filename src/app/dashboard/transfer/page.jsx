@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from "react";
+import axios from 'axios';
 import styles from "@/app/ui/dashboard/transfers/transfer.module.css";
 
 const TransferForm = () => {
@@ -37,6 +38,16 @@ const TransferForm = () => {
       recipientAccount: "",
       groupTransfer: false,
     });
+
+    axios.post('votre_url', dataWithReference)
+      .then(response => {
+        setTransfers((prevTransfers) => prevTransfers.map(transfer =>
+          transfer.id === dataWithReference.id ? { ...transfer, status: "done" } : transfer
+        ));
+      })
+      .catch(error => {
+        console.error('Error submitting transfer:', error);
+      });
   };
 
   const generateUniqueReference = () => {
