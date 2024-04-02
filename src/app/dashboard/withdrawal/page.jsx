@@ -1,15 +1,18 @@
-"use client";
+"use client"
 import React, { useState } from "react";
-import styles from '@/app/ui/dashboard/withdrawal/withdrawal.module.css'
+import styles from '@/app/ui/dashboard/withdrawal/withdrawal.module.css';
 
 const WithdrawalForm = ({ accounts }) => {
   const [withdrawals, setWithdrawals] = useState([]);
   const [formData, setFormData] = useState({
-    accountId: "",
     amount: "",
-    date: "",
-    time: "",
-    overdraftEnabled: false,
+    label: "",
+    dateEffect: "",
+    saveDate: "",
+    extern: false,
+    status: false,
+    categoryId: "",
+    accountId: "",
   });
 
   const handleChange = (e) => {
@@ -42,18 +45,23 @@ const WithdrawalForm = ({ accounts }) => {
       const newWithdrawal = {
         accountId: formData.accountId,
         amount: parseFloat(formData.amount),
-        date: formData.date,
-        time: formData.time,
-        overdraftEnabled: formData.overdraftEnabled,
+        dateEffect: formData.dateEffect,
+        saveDate: formData.saveDate,
+        extern: formData.extern,
+        status: formData.status,
+        categoryId: formData.categoryId,
       };
       setWithdrawals((prevWithdrawals) => [...prevWithdrawals, newWithdrawal]);
       alert("Withdrawal completed successfully");
       setFormData({
-        accountId: "",
         amount: "",
-        date: "",
-        time: "",
-        overdraftEnabled: false,
+        label: "",
+        dateEffect: "",
+        saveDate: "",
+        extern: false,
+        status: false,
+        categoryId: "",
+        accountId: "",
       });
     } else {
       alert(
@@ -65,26 +73,7 @@ const WithdrawalForm = ({ accounts }) => {
   return (
     <div>
         <div className={styles.container}>
-            <form
-                onSubmit={handleSubmit}
-                className={styles.form}
-            >
-                <div className={styles.section}>
-                <label htmlFor="accountId">Account:</label>
-                <select
-                    id="accountId"
-                    name="accountId"
-                    value={formData.accountId}
-                    onChange={handleChange}
-                >
-                    <option value="">Select an account</option>
-                    {accounts?.map((account) => (
-                    <option key={account.id} value={account.id}>
-                        {account.firstName} {account.lastName} - {account.accountNumber}
-                    </option>
-                    ))}
-                </select>
-                </div>
+            <form onSubmit={handleSubmit} className={styles.form}>
                 <div className={styles.section}>
                 <label htmlFor="amount">Amount</label>
                 <input
@@ -96,38 +85,83 @@ const WithdrawalForm = ({ accounts }) => {
                 />
                 </div>
                 <div className={styles.section}>
-                <label htmlFor="date">Date</label>
+                <label htmlFor="label">Label</label>
                 <input
-                    id="date"
-                    type="date"
-                    name="date"
-                    value={formData.date}
+                    id="label"
+                    type="text"
+                    name="label"
+                    value={formData.label}
                     onChange={handleChange}
                 />
                 </div>
                 <div className={styles.section}>
-                <label htmlFor="time">Time</label>
+                <label htmlFor="dateEffect">Effective date</label>
                 <input
-                    id="time"
-                    type="time"
-                    name="time"
-                    value={formData.time}
+                    id="dateEffect"
+                    type="date"
+                    name="dateEffect"
+                    value={formData.dateEffect}
+                    onChange={handleChange}
+                />
+                </div>
+                <div className={styles.section}>
+                <label htmlFor="saveDate">Save date</label>
+                <input
+                    id="saveDate"
+                    type="date"
+                    name="saveDate"
+                    value={formData.saveDate}
                     onChange={handleChange}
                 />
                 </div>
                 <div>
-                <label htmlFor="overdraftEnabled">Activate overdraft</label>
+                <label htmlFor="extern">Extern</label>
                 <input
-                    id="overdraftEnabled"
+                    id="extern"
                     type="checkbox"
-                    name="overdraftEnabled"
-                    checked={formData.overdraftEnabled}
+                    name="extern"
+                    checked={formData.extern}
+                    onChange={handleChange}
+                />
+                </div>
+                <div>
+                <label htmlFor="status">Status</label>
+                <input
+                    id="status"
+                    type="checkbox"
+                    name="status"
+                    checked={formData.status}
                     onChange={handleChange}
                 />
                 </div>
                 <div className={styles.section}>
-                    <button type="submit">Confirm the withdrawal</button>    
-                </div>        
+                <label htmlFor="categoryId">Category ID</label>
+                <select
+                    id="categoryId"
+                    name="categoryId"
+                    value={formData.categoryId}
+                    onChange={handleChange}
+                >
+                    <option value="">Select a category</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                </select>
+                </div>
+                <div className={styles.section}>
+                <label htmlFor="accountId">Account ID</label>
+                <input
+                    id="accountId"
+                    type="text"
+                    name="accountId"
+                    value={formData.accountId}
+                    onChange={handleChange}
+                />
+                </div>
+                <div className={styles.section}>
+                <button type="submit">Confirm withdrawal</button>
+                </div>
             </form>
         </div>
         <div className={styles.container}>
@@ -136,13 +170,14 @@ const WithdrawalForm = ({ accounts }) => {
                 <div key={index} className="border p-2 m-2">
                     <p>Account ID: {withdrawal.accountId}</p>
                     <p>Amount: {withdrawal.amount}</p>
-                    <p>Date: {withdrawal.date}</p>
-                    <p>Time: {withdrawal.time}</p>
-                    <p>Overdraft Enabled: {withdrawal.overdraftEnabled.toString()}</p>
+                    <p>Date Effect: {withdrawal.dateEffect}</p>
+                    <p>Save Date: {withdrawal.saveDate}</p>
+                    <p>Extern: {withdrawal.extern.toString()}</p>
+                    <p>Status: {withdrawal.status.toString()}</p>
+                    <p>Category ID: {withdrawal.categoryId}</p>
                 </div>
             ))}
         </div>
-        
     </div>
   );
 };

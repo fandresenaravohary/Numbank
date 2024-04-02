@@ -8,10 +8,12 @@ const TransferForm = () => {
   const [formData, setFormData] = useState({
     amount: "",
     reason: "",
-    effectDate: "",
-    registerDate: "",
-    recipientAccount: "",
-    groupTransfer: false,
+    dateEffect: "",
+    saveDate: "",
+    extern: false,
+    status: false,
+    accountIdSender: "",
+    accountIdRecipient: "",
   });
 
   const [cancelledTransferId, setCancelledTransferId] = useState(null);
@@ -33,10 +35,12 @@ const TransferForm = () => {
     setFormData({
       amount: "",
       reason: "",
-      effectDate: "",
-      registerDate: "",
-      recipientAccount: "",
-      groupTransfer: false,
+      dateEffect: "",
+      saveDate: "",
+      extern: false,
+      status: false,
+      accountIdSender: "",
+      accountIdRecipient: "",
     });
 
     axios.post('votre_url', dataWithReference)
@@ -89,50 +93,68 @@ const TransferForm = () => {
                 />
                 </div>
                 <div className={styles.section}>
-                <label htmlFor="effectDate">Effective date :</label>
+                <label htmlFor="dateEffect">Effective date :</label>
                 <input
-                    id="effectDate"
+                    id="dateEffect"
                     type="date"
-                    name="effectDate"
-                    value={formData.effectDate}
+                    name="dateEffect"
+                    value={formData.dateEffect}
                     onChange={handleChange}
                     required
                 />
                 </div>
                 <div className={styles.section}>
-                <label htmlFor="registerDate">Registration date :</label>
+                <label htmlFor="saveDate">Registration date :</label>
                 <input
-                    id="registerDate"
+                    id="saveDate"
                     type="date"
-                    name="registerDate"
-                    value={formData.registerDate}
+                    name="saveDate"
+                    value={formData.saveDate}
                     onChange={handleChange}
                     required
                 />
-                </div>
-                <div className={styles.section}>
-                <label htmlFor="recipientAccount">Recipient account :</label>
-                <select
-                    id="recipientAccount"
-                    name="recipientAccount"
-                    value={formData.recipientAccount}
-                    onChange={handleChange}
-                    required
-                >
-                    <option value="">Select recipient account</option>
-                    <option value="sameBank">Same bank (X)</option>
-                    <option value="otherBank">Other bank (BMOI)</option>
-                </select>
                 </div>
                 <div>
-                <label htmlFor="groupTransfer">Group transfer / Scheduled :</label>
-                <input
-                    id="groupTransfer"
-                    type="checkbox"
-                    name="groupTransfer"
-                    checked={formData.groupTransfer}
-                    onChange={handleChange}
-                />
+                  <label htmlFor="extern">Extern :</label>
+                  <input
+                      id="extern"
+                      type="checkbox"
+                      name="extern"
+                      checked={formData.extern}
+                      onChange={handleChange}
+                  />
+                </div>
+                <div className="ml-6">
+                  <label htmlFor="status">status :</label>
+                  <input
+                      id="status"
+                      type="checkbox"
+                      name="status"
+                      checked={formData.status}
+                      onChange={handleChange}
+                  />
+                </div>
+                <div className={styles.section}>
+                  <label htmlFor="accountIdSender">accountIdSender :</label>
+                  <input
+                      id="accountIdSender"
+                      type="text"
+                      name="accountIdSender"
+                      value={formData.accountIdSender}
+                      onChange={handleChange}
+                      required
+                  />
+                </div>
+                <div className={styles.section}>
+                  <label htmlFor="accountIdRecipient">accountIdRecipient :</label>
+                  <input
+                      id="accountIdRecipient"
+                      type="text"
+                      name="accountIdRecipient"
+                      value={formData.accountIdRecipient}
+                      onChange={handleChange}
+                      required
+                  />
                 </div>
                 <div className={styles.section}>
                 <button type="submit">Confirm transfer</button>
@@ -140,31 +162,31 @@ const TransferForm = () => {
             </form>  
         </div>
         <div className={styles.container}>
-        <h2>Lists of transfers</h2>
-        {transfers.map((transfer) => (
-          <div key={transfer.id} className="border p-4 my-2">
-            <p>Amount : {transfer.amount}</p>
-            <p>Reason : {transfer.reason}</p>
-            <p>Effective Date : {transfer.effectDate}</p>
-            <p>Registration date : {transfer.registerDate}</p>
-            {transfer.status === "done" ? (
-              <p>Statut : Done</p>
-            ) : (
-              <>
-                <p>Statut : Loading</p>
-                {new Date(transfer.effectDate) > new Date() && (
-                  <button onClick={() => handleCancel(transfer.id)}>
-                    Cancel
-                  </button>
-                )}
-                {cancelledTransferId === transfer.id && (
-                  <p>Transfer cancelled</p>
-                )}
-              </>
-            )}
-          </div>
-        ))}
-      </div>
+          <h2>Lists of transfers</h2>
+          {transfers.map((transfer) => (
+            <div key={transfer.id} className="border p-4 my-2">
+              <p>Amount : {transfer.amount}</p>
+              <p>Reason : {transfer.reason}</p>
+              <p>Effective Date : {transfer.dateEffect}</p>
+              <p>Registration date : {transfer.saveDate}</p>
+              {transfer.status === "done" ? (
+                <p>Status : Done</p>
+              ) : (
+                <>
+                  <p>Status : Loading</p>
+                  {new Date(transfer.dateEffect) > new Date() && (
+                    <button onClick={() => handleCancel(transfer.id)}>
+                      Cancel
+                    </button>
+                  )}
+                  {cancelledTransferId === transfer.id && (
+                    <p>Transfer cancelled</p>
+                  )}
+                </>
+              )}
+            </div>
+          ))}
+        </div>
     </div>
   );
 };

@@ -1,41 +1,43 @@
 "use client";
 import { useState } from "react";
+import axios from "axios";
 import styles from "@/app/ui/dashboard/products/addProduct/addProduct.module.css";
 
 const AccountForm = () => {
   const [accounts, setAccounts] = useState([]);
   const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    birthDate: "",
-    salary: "",
-    accountNumber: "",
+    customerFirstName: "",
+    customerLastName: "",
+    birthdate: "",
+    netSalary: "",
+    number: "",
+    debt: false,
   });
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
+    const { name, value, type, checked } = e.target;
+    const newValue = type === "checkbox" ? checked : value;
     setFormData((prevState) => ({
       ...prevState,
-      [name]: value,
+      [name]: newValue,
     }));
   };
 
   const sendFormDataToBackend = async (formData) => {
     try {
-      const response = await axios.post('https://app.numbank.mg/accounts', formData);
+      const response = await axios.post("http://localhost:8080/accounts", formData);
       console.log(response.data);
       setAccounts((prevAccounts) => [...prevAccounts, response.data]);
     } catch (error) {
-      console.error('An error occurred while sending the data to the backend:', error);
-      alert('An error occurred while sending the data to the backend');
+      console.error("An error occurred while sending the data to the backend:", error);
+      alert("An error occurred while sending the data to the backend");
     }
   };
-  
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const today = new Date();
-    const birthDate = new Date(formData.birthDate);
+    const birthDate = new Date(formData.birthdate);
     let age = today.getFullYear() - birthDate.getFullYear();
     if (
       today <
@@ -44,18 +46,18 @@ const AccountForm = () => {
       age--;
     }
     if (age < 21) {
-      alert("Please, you must have 21 years");
+      alert("Please, you must be at least 21 years old");
       return;
     }
 
     sendFormDataToBackend(formData);
-    setAccounts((prevState) => [...prevState, formData]);
     setFormData({
-      firstName: "",
-      lastName: "",
-      birthDate: "",
-      salary: "",
-      accountNumber: "",
+      customerFirstName: "",
+      customerLastName: "",
+      birthdate: "",
+      netSalary: "",
+      number: "",
+      debt: false,
     });
   };
 
@@ -65,62 +67,73 @@ const AccountForm = () => {
         <form onSubmit={handleSubmit} className={styles.form}>
           <input
             type="text"
-            id="firstName"
-            name="firstName"
-            placeholder="first name"
-            value={formData.firstName}
+            id="customerFirstName"
+            name="customerFirstName"
+            placeholder="First Name"
+            value={formData.customerFirstName}
             onChange={handleChange}
             required
           />
           <input
             type="text"
-            id="lastName"
-            name="lastName"
-            placeholder="last name"
-            value={formData.lastName}
+            id="customerLastName"
+            name="customerLastName"
+            placeholder="Last Name"
+            value={formData.customerLastName}
             onChange={handleChange}
             required
           />
           <input
             type="date"
-            id="birthDate"
-            name="birthDate"
-            value={formData.birthDate}
+            id="birthdate"
+            name="birthdate"
+            value={formData.birthdate}
             onChange={handleChange}
             required
           />
           <input
             type="number"
-            id="salary"
-            name="salary"
-            placeholder="salary"
-            value={formData.salary}
+            id="netSalary"
+            name="netSalary"
+            placeholder="Net Salary"
+            value={formData.netSalary}
             onChange={handleChange}
             required
           />
           <input
             type="text"
-            id="accountNumber"
-            name="accountNumber"
-            placeholder="account number"
-            value={formData.accountNumber}
+            id="number"
+            name="number"
+            placeholder="Account Number"
+            value={formData.number}
             onChange={handleChange}
             required
           />
+          <div>
+          <label htmlFor="debt">Debt:</label>
+          <input
+            type="checkbox"
+            id="debt"
+            name="debt"
+            checked={formData.debt}
+            onChange={handleChange}
+          />
+          </div>
           <button type="submit">Add</button>
         </form>
       </div>
       <div className={styles.container}>
-        <h2 className={styles.title}>Accounts lists:</h2>
+        <h2 className={styles.title}>Accounts List:</h2>
         <table className={styles.table}>
           <tbody>
             {accounts.map((account, index) => (
               <tr key={index}>
-                <td>{account.firstName}</td>
-                <td>{account.lastName}</td>
-                <td>{account.birthDate}</td>
-                <td>{account.salary}</td>
-                <td>{account.accountNumber}</td>
+                <td>{account.customerFirstName}</td>
+                <td>{account.customerLastName}</td>
+                <td>{account.birthdate}</td>
+                <td>{account.netSalary}</td>
+                <td>{account.number}</td>
+                <td>{account.debt ? "Yes" : "No"}</td>
               </tr>
             ))}
           </tbody>

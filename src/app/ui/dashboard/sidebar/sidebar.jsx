@@ -31,18 +31,8 @@ const menuItems = [
         icon: <BiMoneyWithdraw />,
       },
       {
-        title: "interest",
-        path: "/dashboard/interest",
-        icon: <GiPayMoney />,
-      },
-      {
         title: "Transfers",
         path: "/dashboard/transfer",
-        icon: <FaMoneyBillTransfer />,
-      },
-      {
-        title: "External Transfers",
-        path: "/dashboard/externalTransfer",
         icon: <FaMoneyBillTransfer />,
       },
       {
