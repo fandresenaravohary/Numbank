@@ -1,5 +1,6 @@
-"use client"
+"use client";
 import React, { useState } from "react";
+import axios from 'axios';
 import styles from '@/app/ui/dashboard/externalTransfer/externalTransfer.module.css'
 
 const ExternalTransferForm = ({ onSubmit }) => {
@@ -33,6 +34,13 @@ const ExternalTransferForm = ({ onSubmit }) => {
         effectiveDate: "",
         registrationDate: "",
       });
+
+      axios.post('votre_url', formData)
+        .then(response => {
+        })
+        .catch(error => {
+          console.error('Error submitting external transfer:', error);
+        });
     }
   };
 
@@ -111,4 +119,3 @@ const ExternalTransferForm = ({ onSubmit }) => {
 };
 
 export default ExternalTransferForm;
-
