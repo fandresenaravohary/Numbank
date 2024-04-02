@@ -27,7 +27,7 @@ const AccountForm = () => {
 
   useEffect(() => {
     getAllAccounts();
-  }, [accounts]);
+  }, []);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -39,10 +39,12 @@ const AccountForm = () => {
   };
 
   const sendFormDataToBackend = async (formData) => {
+    const dataToSend = [];
+    dataToSend.push(formData);
     try {
       const response = await axios.post(
         "http://localhost:8080/accounts",
-        formData
+        dataToSend
       );
       console.log(response.data);
       setAccounts((prevAccounts) => [...prevAccounts, response.data]);
@@ -149,10 +151,9 @@ const AccountForm = () => {
           <tbody>
             {accounts.map((account, index) => (
               <tr key={index}>
-                <td>{account.customerFirstName}</td>
-                <td>{account.customerLastName}</td>
-                <td>{account.birthdate}</td>
-                <td>{account.netSalary}</td>
+                <td>Client name: {account.customerFirstName} {account.customerLastName}</td>
+                <td>Birth Date: {account.birthdate}</td>
+                <td>Net Salary: {account.netSalary}</td>
                 <td>{account.number}</td>
                 <td>{account.debt ? "Yes" : "No"}</td>
               </tr>
