@@ -3,16 +3,20 @@ import React, { useState } from 'react';
 
 const DateSelector = ({ onSubmit }) => {
   const [selectedDate, setSelectedDate] = useState(new Date().toISOString().split('T')[0]);
-  const [balances, setBalances] = useState(null); // State to hold balances
+  const [balances, setBalances] = useState(null);
 
   const handleChangeDate = (e) => {
     setSelectedDate(e.target.value);
   };
 
-  const handleSubmit = async (e) => { // Make it asynchronous to handle API calls
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const balancesForDate = await onSubmit(selectedDate); // Fetch balances for selected date
-    setBalances(balancesForDate);
+    try {
+      const response = await axios.get(`/api/balances/${selectedDate}`);
+      setBalances(response.data);
+    } catch (error) {
+      console.error('Error fetching balances:', error);
+    }
   };
 
   return (
