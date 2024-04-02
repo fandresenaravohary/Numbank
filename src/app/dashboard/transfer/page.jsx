@@ -2,8 +2,9 @@
 import React, { useState } from "react";
 import axios from 'axios';
 import styles from "@/app/ui/dashboard/transfers/transfer.module.css";
+import AccountForm from "../accounts/page";
 
-const TransferForm = () => {
+const TransferForm = ({accounts}) => {
   const [transfers, setTransfers] = useState([]);
   const [formData, setFormData] = useState({
     amount: "",
@@ -43,7 +44,7 @@ const TransferForm = () => {
       accountIdRecipient: "",
     });
 
-    axios.post('votre_url', dataWithReference)
+    axios.post('http://localhost:8080/transactions/transfert', dataWithReference)
       .then(response => {
         setTransfers((prevTransfers) => prevTransfers.map(transfer =>
           transfer.id === dataWithReference.id ? { ...transfer, status: "done" } : transfer
@@ -136,25 +137,37 @@ const TransferForm = () => {
                 </div>
                 <div className={styles.section}>
                   <label htmlFor="accountIdSender">accountIdSender :</label>
-                  <input
+                  <select
                       id="accountIdSender"
-                      type="text"
                       name="accountIdSender"
                       value={formData.accountIdSender}
                       onChange={handleChange}
                       required
-                  />
+                  >
+                      <option value="">Select Sender Account</option>
+                      {accounts?.map((account) => (
+                      <option key={account.id} value={account.id}>
+                          {account.customerFirstName} {account.customerLastName} - {account.number}
+                      </option>
+                    ))}
+                  </select>
                 </div>
                 <div className={styles.section}>
                   <label htmlFor="accountIdRecipient">accountIdRecipient :</label>
-                  <input
+                  <select
                       id="accountIdRecipient"
-                      type="text"
                       name="accountIdRecipient"
                       value={formData.accountIdRecipient}
                       onChange={handleChange}
                       required
-                  />
+                  >
+                      <option value="">Select Recipient Account</option>
+                      {accounts?.map((account) => (
+                      <option key={account.id} value={account.id}>
+                          {account.customerFirstName} {account.customerLastName} - {account.number}
+                      </option>
+                    ))}
+                  </select>
                 </div>
                 <div className={styles.section}>
                 <button type="submit">Confirm transfer</button>

@@ -1,3 +1,4 @@
+"use client"
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import styles from "@/app/ui/dashboard/balance/balance.module.css";

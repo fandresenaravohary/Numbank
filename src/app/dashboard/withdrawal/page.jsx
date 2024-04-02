@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React, { useState } from "react";
 import styles from '@/app/ui/dashboard/withdrawal/withdrawal.module.css';
 
@@ -38,10 +38,7 @@ const WithdrawalForm = ({ accounts }) => {
     const totalAmountAvailable =
       selectedAccount.balance + selectedAccount.salary / 3;
 
-    if (
-      totalAmountAvailable >= parseFloat(formData.amount) ||
-      formData.overdraftEnabled
-    ) {
+    if (totalAmountAvailable >= parseFloat(formData.amount)) {
       const newWithdrawal = {
         accountId: formData.accountId,
         amount: parseFloat(formData.amount),
@@ -151,13 +148,19 @@ const WithdrawalForm = ({ accounts }) => {
                 </div>
                 <div className={styles.section}>
                 <label htmlFor="accountId">Account ID</label>
-                <input
+                <select
                     id="accountId"
-                    type="text"
                     name="accountId"
                     value={formData.accountId}
                     onChange={handleChange}
-                />
+                >
+                    <option value="">Select an account</option>
+                    {accounts?.map((account) => (
+                      <option key={account.id} value={account.id}>
+                          {account.customerFirstName} {account.customerLastName} - {account.number}
+                      </option>
+                    ))}
+                </select>
                 </div>
                 <div className={styles.section}>
                 <button type="submit">Confirm withdrawal</button>
