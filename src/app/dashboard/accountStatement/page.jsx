@@ -1,10 +1,23 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
-const AccountStatement = ({ transactions }) => {
+const AccountStatement = () => {
+  const [transactions, setTransactions] = useState([]);
+
+  useEffect(() => {
+    axios.get('http://localhost:8080/transactions/statements/{accountid}')
+      .then(response => {
+        setTransactions(response.data);
+      })
+      .catch(error => {
+        console.error('Error fetching account statement:', error);
+      });
+  }, []);
+
   return (
     <div>
       <h2>Account Statement</h2>
-      {transactions?.map((transaction, index) => (
+      {transactions.map((transaction, index) => (
         <div key={index}>
           <p>Date: {transaction.date}</p>
           <p>Reference: {transaction.reference}</p>
@@ -20,3 +33,4 @@ const AccountStatement = ({ transactions }) => {
 };
 
 export default AccountStatement;
+
