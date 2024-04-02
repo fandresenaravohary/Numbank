@@ -121,7 +121,7 @@ const WithdrawalForm = ({ accounts }) => {
                     onChange={handleChange}
                 />
                 </div>
-                <div>
+                <div className="ml-6">
                 <label htmlFor="status">Status</label>
                 <input
                     id="status"

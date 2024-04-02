@@ -31,8 +31,7 @@ const DateSelector = ({ onSubmit }) => {
       <div className={styles.container}>
         <form onSubmit={handleSubmit} className={styles.form}>
           <div className={styles.section}>
-            <label htmlFor="startDateTime">Choose a start date: </label>{" "}
-            {/* Ajout de l'attribut htmlFor */}
+            <label htmlFor="startDateTime">Choose a start date: </label>
             <input
               type="date"
               id="startDateTime"
@@ -41,8 +40,7 @@ const DateSelector = ({ onSubmit }) => {
             />
           </div>
           <div className={styles.section}>
-            <label htmlFor="endDateTime">Choose an end date: </label>{" "}
-            {/* Modification du label */}
+            <label htmlFor="endDateTime">Choose an end date: </label>
             <input
               type="date"
               id="endDateTime"
