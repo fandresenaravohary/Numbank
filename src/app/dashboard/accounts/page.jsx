@@ -1,7 +1,8 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import styles from "@/app/ui/dashboard/products/addProduct/addProduct.module.css";
+import { get } from "react-hook-form";
 
 const AccountForm = () => {
   const [accounts, setAccounts] = useState([]);
@@ -14,6 +15,20 @@ const AccountForm = () => {
     debt: false,
   });
 
+  const getAllAccounts = async () => {
+    try {
+      const response = await axios.get("http://localhost:8080/accounts");
+      setAccounts(response.data);
+      console.log(accounts);
+    } catch (error) {
+      console.error("An error backend:", error);
+    }
+  };
+
+  useEffect(() => {
+    getAllAccounts();
+  }, [accounts]);
+
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     const newValue = type === "checkbox" ? checked : value;
@@ -25,11 +40,17 @@ const AccountForm = () => {
 
   const sendFormDataToBackend = async (formData) => {
     try {
-      const response = await axios.post("http://localhost:8080/accounts", formData);
+      const response = await axios.post(
+        "http://localhost:8080/accounts",
+        formData
+      );
       console.log(response.data);
       setAccounts((prevAccounts) => [...prevAccounts, response.data]);
     } catch (error) {
-      console.error("An error occurred while sending the data to the backend:", error);
+      console.error(
+        "An error occurred while sending the data to the backend:",
+        error
+      );
       alert("An error occurred while sending the data to the backend");
     }
   };
@@ -110,14 +131,14 @@ const AccountForm = () => {
             required
           />
           <div>
-          <label htmlFor="debt">Debt:</label>
-          <input
-            type="checkbox"
-            id="debt"
-            name="debt"
-            checked={formData.debt}
-            onChange={handleChange}
-          />
+            <label htmlFor="debt">Debt:</label>
+            <input
+              type="checkbox"
+              id="debt"
+              name="debt"
+              checked={formData.debt}
+              onChange={handleChange}
+            />
           </div>
           <button type="submit">Add</button>
         </form>
