@@ -36,8 +36,13 @@ const menuItems = [
         icon: <FaMoneyBillTransfer />,
       },
       {
-        title: "Standing Balance",
-        path: "/dashboard/standingBalance",
+        title: "Balance History",
+        path: "/dashboard/balanceHistory",
+        icon: <MdAccountBalanceWallet />,
+      },
+      {
+        title: "Money drawal balance",
+        path: "/dashboard/balanceMoneyDrawal",
         icon: <MdAccountBalanceWallet />,
       },
       {
@@ -52,41 +57,6 @@ const menuItems = [
       },
     ],
   },
-  // {
-  //   title: "Analytics",
-  //   list: [
-  //     {
-  //       title: "Revenue",
-  //       path: "/dashboard/revenue",
-  //       icon: <MdWork />,
-  //     },
-  //     {
-  //       title: "Reports",
-  //       path: "/dashboard/reports",
-  //       icon: <MdAnalytics />,
-  //     },
-  //     {
-  //       title: "Teams",
-  //       path: "/dashboard/teams",
-  //       icon: <MdPeople />,
-  //     },
-  //   ],
-  // },
-  // {
-  //   title: "User",
-  //   list: [
-  //     {
-  //       title: "Settings",
-  //       path: "/dashboard/settings",
-  //       icon: <MdOutlineSettings />,
-  //     },
-  //     {
-  //       title: "Help",
-  //       path: "/dashboard/help",
-  //       icon: <MdHelpCenter />,
-  //     },
-  //   ],
-  // },
 ];
 
 const Sidebar = () => {
