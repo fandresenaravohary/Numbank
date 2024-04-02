@@ -60,6 +60,15 @@ const WithdrawalForm = ({ accounts }) => {
         categoryId: "",
         accountId: "",
       });
+
+      axios.post('http://localhost:8080/transactions/supply', newWithdrawal)
+      .then(response => {
+        console.log('Withdrawal successful:', response);
+      })
+      .catch(error => {
+        console.error('Error submitting withdrawal:', error);
+      });
+
     } else {
       alert(
         "Insufficient funds. Please choose a lower amount or activate the authorised overdraft."
