@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import styles from '@/app/ui/dashboard/withdrawal/withdrawal.module.css';
+import { setWithdrawalDataToBackend } from "@/utils/api/data";
 
 const WithdrawalForm = ({ accounts }) => {
   const [withdrawals, setWithdrawals] = useState([]);
@@ -49,7 +50,6 @@ const WithdrawalForm = ({ accounts }) => {
         categoryId: formData.categoryId,
       };
       setWithdrawals((prevWithdrawals) => [...prevWithdrawals, newWithdrawal]);
-      alert("Withdrawal completed successfully");
       setFormData({
         amount: "",
         label: "",
@@ -60,15 +60,8 @@ const WithdrawalForm = ({ accounts }) => {
         categoryId: "",
         accountId: "",
       });
-
-      axios.post('http://localhost:8080/transactions/supply', newWithdrawal)
-      .then(response => {
-        console.log('Withdrawal successful:', response);
-      })
-      .catch(error => {
-        console.error('Error submitting withdrawal:', error);
-      });
-
+      setWithdrawalDataToBackend(formData);
+      alert("Withdrawal completed successfully");
     } else {
       alert(
         "Insufficient funds. Please choose a lower amount or activate the authorised overdraft."

@@ -2,8 +2,7 @@
 
 import { useEffect, useState } from "react";
 import styles from "@/app/ui/dashboard/products/addProduct/addProduct.module.css";
-import { get } from "react-hook-form";
-import { getAllAccounts, sendFormDataToBackend } from "../../../utils/api/data";
+import { getAllAccounts, sendAccountDataToBackend } from "../../../utils/api/data";
 
 const AccountForm = () => {
   const [accounts, setAccounts] = useState([]);
@@ -47,7 +46,7 @@ const AccountForm = () => {
       return;
     }
 
-    sendFormDataToBackend(formData);
+    sendAccountDataToBackend(formData);
     setFormData({
       customerFirstName: "",
       customerLastName: "",

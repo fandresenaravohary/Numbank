@@ -11,7 +11,7 @@ const getAllAccounts = async () => {
   }
 };
 
-const sendFormDataToBackend = async (formData) => {
+const sendAccountDataToBackend = async (formData) => {
   const dataToSend = [];
   dataToSend.push(formData);
   try {
@@ -30,8 +30,20 @@ const getLoanInfo = async (id) => {
   }
 }
 
+const setWithdrawalDataToBackend = async (formData) => {
+  const newWithdrawal = [];
+  dataToSend.push(formData);
+  try {
+    const response = await axios.post(`${BASE_URL}/transactions/supply`, newWithdrawal)
+    return response.data
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 export { 
   getAllAccounts,
-  sendFormDataToBackend,
+  sendAccountDataToBackend,
   getLoanInfo,
+  setWithdrawalDataToBackend
 };
