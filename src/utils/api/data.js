@@ -30,7 +30,7 @@ const getLoanInfo = async (id) => {
   }
 }
 
-const setWithdrawalDataToBackend = async (formData) => {
+const setTransactionSupply = async (formData) => {
   const newWithdrawal = [];
   dataToSend.push(formData);
   try {
@@ -45,5 +45,5 @@ export {
   getAllAccounts,
   sendAccountDataToBackend,
   getLoanInfo,
-  setWithdrawalDataToBackend
+  setTransactionSupply,
 };

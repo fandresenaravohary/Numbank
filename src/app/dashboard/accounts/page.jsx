@@ -112,11 +112,11 @@ const AccountForm = () => {
         <table className={styles.table}>
           <thead>
             <tr>
-              <td>Client name</td>
-              <td>Birthdate</td>
-              <td>Net Salary</td>
-              <td>Account Number</td>
-              <td>Debt</td>
+              <td><h1>Client name</h1></td>
+              <td><h1>Birthdate</h1></td>
+              <td><h1>Net Salary</h1></td>
+              <td><h1>Account Number</h1></td>
+              <td><h1>Debt</h1></td>
             </tr>
           </thead>
           <tbody>

@@ -1,9 +1,9 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from '@/app/ui/dashboard/withdrawal/withdrawal.module.css';
-import { setWithdrawalDataToBackend } from "@/utils/api/data";
+import { getAllAccounts, setTransactionSupply } from "@/utils/api/data";
 
-const WithdrawalForm = ({ accounts }) => {
+const WithdrawalForm = () => {
   const [withdrawals, setWithdrawals] = useState([]);
   const [formData, setFormData] = useState({
     amount: "",
@@ -15,6 +15,14 @@ const WithdrawalForm = ({ accounts }) => {
     categoryId: "",
     accountId: "",
   });
+  const [accounts, setAccounts] = useState([]);
+
+
+  useEffect(() => {
+    getAllAccounts().then((data) => {
+      setAccounts(data);
+    });
+  }, []);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -60,7 +68,7 @@ const WithdrawalForm = ({ accounts }) => {
         categoryId: "",
         accountId: "",
       });
-      setWithdrawalDataToBackend(formData);
+      setTransactionSupply(formData);
       alert("Withdrawal completed successfully");
     } else {
       alert(
@@ -85,13 +93,16 @@ const WithdrawalForm = ({ accounts }) => {
                 </div>
                 <div className={styles.section}>
                 <label htmlFor="label">Label</label>
-                <input
+                <select
                     id="label"
-                    type="text"
                     name="label"
                     value={formData.label}
                     onChange={handleChange}
-                />
+                  >
+                    <option value="">Select a label</option>
+                    <option value="CREDIT">CREDIT</option>
+                    <option value="DEBIT">DEBIT</option>
+                </select>
                 </div>
                 <div className={styles.section}>
                 <label htmlFor="dateEffect">Effective date</label>
