@@ -8,8 +8,8 @@ const WithdrawalForm = () => {
   const [formData, setFormData] = useState({
     amount: "",
     label: "",
-    dateEffect: "",
-    saveDate: "",
+    // dateEffect: "",
+    // saveDate: "",
     extern: false,
     status: false,
     categoryId: "",
@@ -35,46 +35,47 @@ const WithdrawalForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const selectedAccount = accounts?.find(
-      (account) => account.id === parseInt(formData.accountId)
-    );
+    // const selectedAccount = accounts?.find(
+    //   (account) => account.id === parseInt(formData.accountId)
+    // );
 
-    if (!selectedAccount) {
-      alert("Selected account not found in provided accounts list.");
-      return;
-    }
+    // if (!selectedAccount) {
+    //   alert("Selected account not found in provided accounts list.");
+    //   return;
+    // }
 
-    const totalAmountAvailable =
-      selectedAccount.balance + selectedAccount.salary / 3;
+    // const totalAmountAvailable =
+    //   selectedAccount.balance + selectedAccount.salary / 3;
 
-    if (totalAmountAvailable >= parseFloat(formData.amount)) {
+    // if (totalAmountAvailable >= formData.amount) {
       const newWithdrawal = {
         accountId: formData.accountId,
-        amount: parseFloat(formData.amount),
-        dateEffect: formData.dateEffect,
-        saveDate: formData.saveDate,
+        amount: formData.amount,
+        // dateEffect: formData.dateEffect,
+        // saveDate: formData.saveDate,
         extern: formData.extern,
         status: formData.status,
         categoryId: formData.categoryId,
       };
+      setTransactionSupply(formData);
+      
       setWithdrawals((prevWithdrawals) => [...prevWithdrawals, newWithdrawal]);
       setFormData({
         amount: "",
         label: "",
-        dateEffect: "",
-        saveDate: "",
+        // dateEffect: "",
+        // saveDate: "",
         extern: false,
         status: false,
         categoryId: "",
         accountId: "",
       });
-      setTransactionSupply(formData);
       alert("Withdrawal completed successfully");
-    } else {
-      alert(
-        "Insufficient funds. Please choose a lower amount or activate the authorised overdraft."
-      );
-    }
+    // } else {
+    //   alert(
+    //     "Insufficient funds. Please choose a lower amount or activate the authorised overdraft."
+    //   );
+    // }
   };
 
   return (
@@ -104,7 +105,7 @@ const WithdrawalForm = () => {
                     <option value="DEBIT">DEBIT</option>
                 </select>
                 </div>
-                <div className={styles.section}>
+                {/* <div className={styles.section}>
                 <label htmlFor="dateEffect">Effective date</label>
                 <input
                     id="dateEffect"
@@ -123,7 +124,7 @@ const WithdrawalForm = () => {
                     value={formData.saveDate}
                     onChange={handleChange}
                 />
-                </div>
+                </div> */}
                 <div>
                 <label htmlFor="extern">Extern</label>
                 <input
@@ -153,10 +154,10 @@ const WithdrawalForm = () => {
                     onChange={handleChange}
                 >
                     <option value="">Select a category</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
+                    <option value="1">Transfert (entry)</option>
+                    <option value="2">Transfert (out)</option>
+                    <option value="3">Salary</option>
+                    <option value="4">Expense</option>
                 </select>
                 </div>
                 <div className={styles.section}>
@@ -168,9 +169,9 @@ const WithdrawalForm = () => {
                     onChange={handleChange}
                 >
                     <option value="">Select an account</option>
-                    {accounts?.map((account) => (
+                    {accounts.map((account) => (
                       <option key={account.id} value={account.id}>
-                          {account.customerFirstName} {account.customerLastName} - {account.number}
+                          {account.customerFirstName}
                       </option>
                     ))}
                 </select>

@@ -32,10 +32,10 @@ const getLoanInfo = async (id) => {
 
 const setTransactionSupply = async (formData) => {
   const newWithdrawal = [];
-  dataToSend.push(formData);
+  newWithdrawal.push(formData);
   try {
     const response = await axios.post(`${BASE_URL}/transactions/supply`, newWithdrawal)
-    return response.data
+    return response.data;
   } catch (error) {
     console.log(error);
   }

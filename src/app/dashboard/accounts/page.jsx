@@ -19,7 +19,7 @@ const AccountForm = () => {
     getAllAccounts().then((data) => {
       setAccounts(data);
     });
-  }, []);
+  }, [accounts]);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -114,6 +114,7 @@ const AccountForm = () => {
             <tr>
               <td><h1>Client name</h1></td>
               <td><h1>Birthdate</h1></td>
+              <td><h1>Balance</h1></td>
               <td><h1>Net Salary</h1></td>
               <td><h1>Account Number</h1></td>
               <td><h1>Debt</h1></td>
@@ -124,6 +125,7 @@ const AccountForm = () => {
               <tr key={index}>
                 <td>{account.customerFirstName} {account.customerLastName}</td>
                 <td>{account.birthdate}</td>
+                <td>{account.balance}</td>
                 <td>{account.netSalary}</td>
                 <td>{account.number}</td>
                 <td>{account.debt ? "Yes" : "No"}</td>
